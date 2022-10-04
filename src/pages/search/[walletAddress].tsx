@@ -1,7 +1,7 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import NFTList from '../../components/nfts/NFTList';
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
 import { Network, Alchemy } from 'alchemy-sdk';
@@ -15,14 +15,28 @@ const settings = {
 const alchemy = new Alchemy(settings);
 
 const WalletNFTPage: NextPage = () => {
-  const { isLoading, error, data, isFetching } = useQuery(
+  const router = useRouter();
+  const walletAddress = router.query.walletAddress as string;
+  console.log(walletAddress);
+
+  const { isLoading, error, data, isFetching, refetch } = useQuery(
     ['getNftsForOwner'],
-    () => alchemy.nft.getNftsForOwner('0xshah.eth', { omitMetadata: false })
+    () => alchemy.nft.getNftsForOwner(walletAddress, { omitMetadata: false }),
+    {
+      enabled: !!walletAddress,
+    }
   );
 
-  if (isLoading) return <LoadingSpinner />;
+  useEffect(() => {
+    refetch();
+  }, [walletAddress, refetch]);
 
-  if (error) return <p>An error has occurred</p>;
+  if (isLoading || isFetching) return <LoadingSpinner />;
+
+  if (error) {
+    console.log(error);
+    return <p>{(error as Error).message}</p>;
+  }
 
   if (data?.ownedNfts) {
     return <NFTList ownedNfts={data?.ownedNfts} />;
