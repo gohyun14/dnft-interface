@@ -12,9 +12,7 @@ const SearchPage: NextPage = () => {
         hold! Click on an NFT to see more specific information such as the NFT's
         description and traits!
       </p>
-      <section>
-        
-      </section>
+      <section></section>
     </div>
   );
 };

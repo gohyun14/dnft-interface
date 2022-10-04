@@ -87,6 +87,11 @@ const MainNavigation = () => {
                       onChange={(e) => {
                         setSearchValue(e.target.value);
                       }}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          handleSearch();
+                        }
+                      }}
                     />
                   </div>
                 </div>
