@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { UserIcon, Bars3Icon, XCircleIcon } from '@heroicons/react/24/outline';
@@ -12,6 +12,13 @@ function classNames(...classes: string[]) {
 const MainNavigation = () => {
   const router = useRouter();
   const activeLink = router.pathname;
+
+  const [searchValue, setSearchValue] = useState<string>('');
+
+  const handleSearch = () => {
+    router.push(`/search/${searchValue}`);
+    setSearchValue('');
+  };
 
   return (
     <Disclosure as="nav" className="sticky top-0 z-50 bg-white shadow">
@@ -53,7 +60,7 @@ const MainNavigation = () => {
                           : 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
                       }
                     >
-                      Mint Dynamic Nfts
+                      Mint
                     </a>
                   </Link>
                 </div>
@@ -74,8 +81,12 @@ const MainNavigation = () => {
                       id="search"
                       name="search"
                       className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 leading-5 placeholder-gray-500 focus:border-indigo-500 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                      placeholder="Search Wallet Address"
+                      placeholder="0x0000...."
                       type="search"
+                      value={searchValue}
+                      onChange={(e) => {
+                        setSearchValue(e.target.value);
+                      }}
                     />
                   </div>
                 </div>
@@ -84,6 +95,7 @@ const MainNavigation = () => {
                 <button
                   type="button"
                   className="inline-flex h-9 items-center rounded-md border border-transparent bg-indigo-100 px-3 py-2 text-sm font-medium leading-4 text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  onClick={handleSearch}
                 >
                   Search
                 </button>
