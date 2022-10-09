@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
-const SearchPage: NextPage = () => {
+const NoWalletFound = () => {
   const router = useRouter();
 
   const [searchValue, setSearchValue] = useState<string>('');
@@ -16,18 +16,17 @@ const SearchPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Search</title>
-        <meta name="description" content="Search Page" />
+        <title>No Wallet</title>
+        <meta name="description" content="No Wallet Found" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className="mx-auto mt-28 w-4/5 text-center">
         <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
-          Search Any Wallet&apos;s NFTs
+          No Wallet Found
         </h1>
         <p className="mb-6 text-lg font-normal text-gray-500 sm:px-16 lg:text-xl xl:px-48">
-          Search up any valid wallet address, and you can see all of the NFTs
-          they hold! Click on an NFT to see more specific information such as
-          the NFT&apos;s description and traits!
+          It looks like you entered an invalid wallet address. Check and make
+          sure you are using the correct wallet address then try again!
         </p>
         <div className="mx-auto flex w-8/12 items-center rounded-md bg-indigo-100 py-7 px-9">
           <div className="relative mx-auto mr-2 w-full text-center">
@@ -67,4 +66,4 @@ const SearchPage: NextPage = () => {
   );
 };
 
-export default SearchPage;
+export default NoWalletFound;

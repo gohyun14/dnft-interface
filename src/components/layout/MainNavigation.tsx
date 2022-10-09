@@ -52,15 +52,26 @@ const MainNavigation = () => {
                       Home
                     </a>
                   </Link>
-                  <Link href="#">
+                  <Link href="/search">
                     <a
                       className={
-                        activeLink === '/mint'
+                        activeLink === '/search'
                           ? 'inline-flex items-center  border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900'
                           : 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
                       }
                     >
-                      Mint
+                      Search
+                    </a>
+                  </Link>
+                  <Link href="/dnfts">
+                    <a
+                      className={
+                        activeLink === '/dnfts'
+                          ? 'inline-flex items-center  border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900'
+                          : 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                      }
+                    >
+                      DNFTs
                     </a>
                   </Link>
                 </div>
@@ -81,7 +92,7 @@ const MainNavigation = () => {
                       id="search"
                       name="search"
                       className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 leading-5 placeholder-gray-500 focus:border-indigo-500 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                      placeholder="0x0000...."
+                      placeholder="Search Wallet Address"
                       type="search"
                       value={searchValue}
                       onChange={(e) => {

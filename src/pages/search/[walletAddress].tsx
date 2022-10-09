@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { useQuery } from '@tanstack/react-query';
 import NFTList from '../../components/nfts/NFTList';
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
+import NoWalletFound from '../../components/nfts/NoWalletFound';
 import { Network, Alchemy } from 'alchemy-sdk';
 import { env } from 'process';
 
@@ -16,12 +18,15 @@ const alchemy = new Alchemy(settings);
 
 const WalletNFTPage: NextPage = () => {
   const router = useRouter();
-  const walletAddress = router.query.walletAddress as string;
+  const walletAddress = router.query.walletAddress;
   console.log(walletAddress);
 
   const { isLoading, error, data, isFetching, refetch } = useQuery(
     ['getNftsForOwner'],
-    () => alchemy.nft.getNftsForOwner(walletAddress, { omitMetadata: false }),
+    () =>
+      alchemy.nft.getNftsForOwner(walletAddress as string, {
+        omitMetadata: false,
+      }),
     {
       enabled: !!walletAddress,
     }
@@ -35,11 +40,30 @@ const WalletNFTPage: NextPage = () => {
 
   if (error) {
     console.log(error);
-    return <p>{(error as Error).message}</p>;
+    return (
+      <>
+        {/* <p>{(error as Error).message}</p>; */}
+        <NoWalletFound />
+      </>
+    );
   }
 
+  console.log(walletAddress);
+
   if (data?.ownedNfts) {
-    return <NFTList ownedNfts={data?.ownedNfts} />;
+    return (
+      <>
+        <Head>
+          <title>Wallet</title>
+          <meta name="description" content="Wallet View Page" />
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
+        </Head>
+        <NFTList ownedNfts={data?.ownedNfts} />
+      </>
+    );
   }
 
   return <p>Hmm</p>; // TODO: invalid address page
