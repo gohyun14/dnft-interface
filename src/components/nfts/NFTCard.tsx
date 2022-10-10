@@ -4,14 +4,12 @@ import Image from 'next/image';
 interface NFTCardProps {
   name: string | undefined;
   image: string | undefined;
-  key: string | undefined;
   onClick: () => void;
 }
 
-const NFTCard = ({ name, image, key, onClick }: NFTCardProps) => {
+const NFTCard = ({ name, image, onClick }: NFTCardProps) => {
   return (
     <div
-      key={key}
       onClick={onClick}
       className="group relative mx-4 mt-4 duration-200 motion-safe:hover:scale-105"
     >

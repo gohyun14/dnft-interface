@@ -36,7 +36,7 @@ const WalletNFTPage: NextPage = () => {
     refetch();
   }, [walletAddress, refetch]);
 
-  if (isLoading || isFetching) return <LoadingSpinner />;
+  if (isLoading || (isLoading && isFetching)) return <LoadingSpinner />;
 
   if (error) {
     console.log(error);
