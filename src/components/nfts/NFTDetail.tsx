@@ -1,7 +1,8 @@
-import React from 'react';
+import { useState } from 'react';
 import { OwnedNft } from 'alchemy-sdk';
 import { Dialog } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/24/solid';
+import { PhotoIcon } from '@heroicons/react/24/outline';
 
 type NFTDetailProps = {
   nft: OwnedNft | undefined;
@@ -9,6 +10,8 @@ type NFTDetailProps = {
 };
 
 const NFTDetail = ({ nft, onClose }: NFTDetailProps) => {
+  const [imageError, setImageError] = useState<boolean>(false);
+
   return (
     <div>
       <button
@@ -22,11 +25,24 @@ const NFTDetail = ({ nft, onClose }: NFTDetailProps) => {
         />
       </button>
       <div className="h-full max-h-[350px] w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
-        <img
-          src={nft?.rawMetadata?.image}
-          alt={nft?.rawMetadata?.name}
-          className="h-full w-full object-cover object-center"
-        />
+        {!imageError ? (
+          <img
+            src={nft?.rawMetadata?.image}
+            alt={nft?.rawMetadata?.image}
+            className="h-full w-full object-cover object-center"
+            onError={() => setImageError(true)}
+            // height="250px"
+            // width="250px"
+          />
+        ) : (
+          <div>
+            <PhotoIcon
+              className="mx-auto mt-2 h-40 w-40 text-gray-500"
+              aria-hidden="true"
+            />
+            <p className="mb-6 text-center text-gray-600">Image not found...</p>
+          </div>
+        )}
       </div>
       <div className="mt-3 text-center sm:mt-5">
         <Dialog.Title
