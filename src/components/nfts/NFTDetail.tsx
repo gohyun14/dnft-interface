@@ -11,6 +11,7 @@ type NFTDetailProps = {
 
 const NFTDetail = ({ nft, onClose }: NFTDetailProps) => {
   const [imageError, setImageError] = useState<boolean>(false);
+  const [imageLoading, setImageLoading] = useState<boolean>(true);
 
   return (
     <div>
@@ -24,15 +25,28 @@ const NFTDetail = ({ nft, onClose }: NFTDetailProps) => {
           aria-hidden="true"
         />
       </button>
-      <div className="h-full max-h-[350px] w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
+      <div className="h-full max-h-[350px] w-full overflow-hidden rounded-md bg-gray-200">
+        {imageLoading && (
+          <div className=" mx-auto h-52 w-full animate-pulse bg-gray-400">
+            &nbsp;
+          </div>
+        )}
         {!imageError ? (
           <img
-            src={nft?.rawMetadata?.image}
-            alt={nft?.rawMetadata?.image}
+            src={
+              nft?.rawMetadata?.image !== undefined
+                ? nft?.rawMetadata?.image
+                : ''
+            }
+            alt={nft?.title}
             className="h-full w-full object-cover object-center"
-            onError={() => setImageError(true)}
-            // height="250px"
-            // width="250px"
+            onError={() => {
+              setImageError(true);
+              setImageLoading(false);
+            }}
+            onLoad={() => {
+              setImageLoading(false);
+            }}
           />
         ) : (
           <div>

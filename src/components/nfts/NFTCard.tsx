@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { PhotoIcon } from '@heroicons/react/24/outline';
+import { IKImage } from 'imagekitio-react';
 
 interface NFTCardProps {
   name: string | undefined;
@@ -9,21 +10,34 @@ interface NFTCardProps {
 
 const NFTCard = ({ name, image, onClick }: NFTCardProps) => {
   const [imageError, setImageError] = useState<boolean>(false);
+  const [imageLoading, setImageLoading] = useState<boolean>(true);
+
+  const urlEndpoint = 'https://ik.imagekit.io/thbgrljbi/';
 
   return (
     <div
       onClick={onClick}
-      className="group relative mx-4 mt-4 duration-200 motion-safe:hover:scale-105"
+      className="group relative mx-4 mt-4 duration-200 motion-safe:hover:scale-[1.02]"
     >
       <div className="h-56 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
+        {imageLoading && (
+          <div className=" mx-auto h-full w-full animate-pulse bg-gray-400">
+            &nbsp;
+          </div>
+        )}
         {!imageError ? (
-          <img
+          <IKImage
+            urlEndpoint={urlEndpoint}
             src={image !== undefined ? image : ''}
             alt={name}
             className="h-full w-full object-cover object-center"
-            onError={() => setImageError(true)}
-            // height="250px"
-            // width="250px"
+            onError={() => {
+              setImageError(true);
+              setImageLoading(false);
+            }}
+            onLoad={() => {
+              setImageLoading(false);
+            }}
           />
         ) : (
           <div>
