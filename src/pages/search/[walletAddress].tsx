@@ -19,7 +19,6 @@ const alchemy = new Alchemy(settings);
 const WalletNFTPage: NextPage = () => {
   const router = useRouter();
   const walletAddress = router.query.walletAddress;
-  console.log(walletAddress);
 
   const { isLoading, error, data, isFetching, refetch } = useQuery(
     ['getNftsForOwner'],
@@ -29,6 +28,7 @@ const WalletNFTPage: NextPage = () => {
       }),
     {
       enabled: !!walletAddress,
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -36,7 +36,7 @@ const WalletNFTPage: NextPage = () => {
     refetch();
   }, [walletAddress, refetch]);
 
-  if (isLoading || (isLoading && isFetching)) return <LoadingSpinner />;
+  if (isLoading || isFetching) return <LoadingSpinner />;
 
   if (error) {
     console.log(error);
@@ -47,8 +47,6 @@ const WalletNFTPage: NextPage = () => {
       </>
     );
   }
-
-  console.log(walletAddress);
 
   if (data?.ownedNfts) {
     return (

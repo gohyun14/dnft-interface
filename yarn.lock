@@ -1734,6 +1734,7 @@ __metadata:
     axios: ^1.0.0
     eslint: 8.22.0
     eslint-config-next: 12.3.1
+    imagekitio-react: ^2.0.0
     next: 12.3.1
     next-auth: ^4.10.3
     postcss: ^8.4.17
@@ -2661,6 +2662,26 @@ __metadata:
   version: 5.2.0
   resolution: "ignore@npm:5.2.0"
   checksum: 6b1f926792d614f64c6c83da3a1f9c83f6196c2839aa41e1e32dd7b8d174cef2e329d75caabb62cb61ce9dc432f75e67d07d122a037312db7caa73166a1bdb77
+  languageName: node
+  linkType: hard
+
+"imagekit-javascript@npm:^1.5.4":
+  version: 1.5.4
+  resolution: "imagekit-javascript@npm:1.5.4"
+  checksum: 8d60ca483873a3f416fe1b99fb9330f055de0b1e49284e44bfb1c2275b04b9a384457cc036216f5d59d81a061bee4df232fc9bc60d91eb7aa62693e4c68fab37
+  languageName: node
+  linkType: hard
+
+"imagekitio-react@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "imagekitio-react@npm:2.0.0"
+  dependencies:
+    imagekit-javascript: ^1.5.4
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0
+  checksum: 252b016a5b9807f59aaa30c12eb481aa6487222e2b9146d315b91dc549810fd7c0d7ab2d753e60397105f1f79bcaf9f0561dbbf592b96f80955466e0385cc2bb
   languageName: node
   linkType: hard
 
@@ -3876,7 +3897,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.8.1":
+"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
