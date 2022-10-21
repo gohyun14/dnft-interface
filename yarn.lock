@@ -2751,6 +2751,7 @@ __metadata:
     prettier-plugin-tailwindcss: ^0.1.13
     prisma: ^4.4.0
     react: 18.2.0
+    react-blockies: ^1.4.1
     react-dom: 18.2.0
     react-query: ^3.39.2
     superjson: ^1.10.0
@@ -5571,7 +5572,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.5.10, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -5653,6 +5654,17 @@ __metadata:
   dependencies:
     safe-buffer: ^5.1.0
   checksum: d779499376bd4cbb435ef3ab9a957006c8682f343f14089ed5f27764e4645114196e75b7f6abf1cbd84fd247c0cb0651698444df8c9bf30e62120fbbc52269d6
+  languageName: node
+  linkType: hard
+
+"react-blockies@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "react-blockies@npm:1.4.1"
+  dependencies:
+    prop-types: ^15.5.10
+  peerDependencies:
+    react: ">=15.0.0"
+  checksum: 87139fc2cc682d34ff8633c58ce96f89826cc3127499b623fb1d8c99dd8e1fe21055750a051933ffc500ca9c88aa017930deae963ffc635135c02907e5d75e22
   languageName: node
   linkType: hard
 
