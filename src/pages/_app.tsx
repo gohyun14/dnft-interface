@@ -12,12 +12,7 @@ import '../styles/globals.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { env } from 'process';
-import {
-  WagmiConfig,
-  createClient,
-  defaultChains,
-  configureChains,
-} from 'wagmi';
+import { WagmiConfig, createClient, chain, configureChains } from 'wagmi';
 
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
@@ -36,8 +31,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
   // Configure chains & providers with the Alchemy provider.
   // Two popular providers are Alchemy (alchemy.com) and Infura (infura.io)
   const { chains, provider, webSocketProvider } = configureChains(
-    defaultChains,
-    [alchemyProvider({ apiKey: env.ALCHEMY_API_KEY }), publicProvider()]
+    [chain.goerli],
+    [alchemyProvider({ apiKey: env.ALCHEMY_API_KEY_GOERLI }), publicProvider()]
   );
 
   // Set up client
@@ -66,7 +61,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       }),
     ],
     provider,
-    webSocketProvider,
+    // webSocketProvider,
   });
   return (
     <SessionProvider session={session}>

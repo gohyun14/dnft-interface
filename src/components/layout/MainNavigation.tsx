@@ -13,9 +13,11 @@ const MainNavigation = () => {
   const router = useRouter();
   const activeLink = router.pathname;
 
-  const { connect, connectors, error, isLoading, pendingConnector } =
-    useConnect({ chainId: chain.goerli.id });
-  const { isConnected, address } = useAccount();
+  const { connect, connectors, error, pendingConnector, isLoading } =
+    useConnect({
+      chainId: chain.goerli.id,
+    });
+  const { isConnected, address, isReconnecting } = useAccount();
   const { disconnect } = useDisconnect();
 
   const [searchValue, setSearchValue] = useState<string>('');
@@ -24,8 +26,6 @@ const MainNavigation = () => {
     router.push(`/search/${searchValue}`);
     setSearchValue('');
   };
-
-  console.log(address);
 
   return (
     <Disclosure as="nav" className="sticky top-0 z-50 bg-white shadow">
@@ -79,6 +79,17 @@ const MainNavigation = () => {
                       }
                     >
                       DNFTs
+                    </a>
+                  </Link>
+                  <Link href="/send-swap">
+                    <a
+                      className={
+                        activeLink === '/send-swap'
+                          ? 'inline-flex items-center  border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900'
+                          : 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                      }
+                    >
+                      Send/Swap
                     </a>
                   </Link>
                 </div>
@@ -136,7 +147,7 @@ const MainNavigation = () => {
               </div>
               <div className="hidden lg:ml-8 lg:flex lg:items-center">
                 {/* Profile dropdown */}
-                {isConnected ? (
+                {!isReconnecting && isConnected ? (
                   <WalletConnectedMenu
                     disconnect={disconnect}
                     address={address}

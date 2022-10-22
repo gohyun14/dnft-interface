@@ -9,7 +9,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-const DNFTTabs = () => {
+const SendSwapTabs = () => {
   const { isConnected } = useAccount();
 
   const noWalletFound = (action: string) => {
@@ -75,4 +75,4 @@ const DNFTTabs = () => {
   );
 };
 
-export default DNFTTabs;
+export default SendSwapTabs;

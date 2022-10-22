@@ -3,11 +3,7 @@ import Link from 'next/link';
 import { Popover, Menu, Transition } from '@headlessui/react';
 import { UserIcon } from '@heroicons/react/24/outline';
 import { UserIcon as UserIconSolid } from '@heroicons/react/24/solid';
-import { useEnsAvatar, useEnsName, Connector } from 'wagmi';
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
-}
+import { useEnsAvatar, useEnsName } from 'wagmi';
 
 type WalletConnectedMenuProps = {
   disconnect: () => void;
@@ -18,20 +14,22 @@ const WalletConnectedMenu = ({
   disconnect,
   address,
 }: WalletConnectedMenuProps) => {
-  const { data: ensAvatar } = useEnsAvatar({ addressOrName: address });
-  const { data: ensName } = useEnsName({ address });
+  // const { data: ensAvatar } = useEnsAvatar({ addressOrName: address });
+  // const { data: ensName } = useEnsName({ address });
 
   return (
     <Popover className="relative">
       {({ close }) => (
         <>
           <Popover.Button className="flex items-center gap-1 rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-normal text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-indigo-800">
-            {ensAvatar ? (
+            {/* {ensAvatar ? (
               <img src={ensAvatar} alt="ENS Avatar" />
             ) : (
               <UserIcon className="h-5 w-5" aria-hidden="true" />
             )}
-            <div>{ensName ? ensName : `${address?.slice(0, 7)}...`}</div>
+            <div>{ensName ? ensName : `${address?.slice(0, 7)}...`}</div> */}
+            <UserIcon className="h-5 w-5" aria-hidden="true" />
+            <div>{`${address?.slice(0, 7)}...`}</div>
           </Popover.Button>
           <Transition
             as={Fragment}
@@ -52,7 +50,8 @@ const WalletConnectedMenu = ({
                     />
                   </div>
                   <span className="text-sm font-normal text-gray-900">
-                    {ensName ? ensName : address}
+                    {/* {ensName ? ensName : address} */}
+                    {address}
                   </span>
                 </div>
                 <div className="relative bg-white p-7">
