@@ -1,22 +1,25 @@
-import { Fragment, useState } from 'react';
+import { Fragment, Dispatch, SetStateAction } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { tokenOption } from '../send-swap/SendTab';
 
-const tokens = [
-  { id: 1, name: 'ETH' },
-  { id: 2, name: 'USDC' },
-  { id: 3, name: 'DAI' },
-];
+type SelectControlledProps = {
+  tokens: tokenOption[];
+  selectedToken: tokenOption | undefined;
+  onChange: (arg: tokenOption) => void;
+};
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-const ERC20Select = () => {
-  const [selectedToken, setSelectedToken] = useState(tokens[0]);
-
+const SelectControlled = ({
+  tokens,
+  selectedToken,
+  onChange,
+}: SelectControlledProps) => {
   return (
-    <Listbox value={selectedToken} onChange={setSelectedToken}>
+    <Listbox value={selectedToken} onChange={onChange}>
       {({ open }) => (
         <div>
           <Listbox.Label className="block text-sm font-medium text-gray-700">
@@ -87,4 +90,4 @@ const ERC20Select = () => {
   );
 };
 
-export default ERC20Select;
+export default SelectControlled;

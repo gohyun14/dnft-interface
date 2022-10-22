@@ -10,7 +10,7 @@ function classNames(...classes: string[]) {
 }
 
 const SendSwapTabs = () => {
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
 
   const noWalletFound = (action: string) => {
     return (
@@ -58,7 +58,11 @@ const SendSwapTabs = () => {
             key="send"
             className={classNames('rounded-xl bg-white p-3')}
           >
-            {isConnected ? <SendTab /> : noWalletFound('send')}
+            {isConnected ? (
+              <SendTab address={address} />
+            ) : (
+              noWalletFound('send')
+            )}
           </Tab.Panel>
           <Tab.Panel
             key="swap"
