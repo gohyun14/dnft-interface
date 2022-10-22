@@ -2751,12 +2751,12 @@ __metadata:
     prettier-plugin-tailwindcss: ^0.1.13
     prisma: ^4.4.0
     react: 18.2.0
-    react-blockies: ^1.4.1
     react-dom: 18.2.0
     react-query: ^3.39.2
     superjson: ^1.10.0
     tailwindcss: ^3.1.8
     typescript: 4.7.4
+    use-debounce: ^8.0.4
     wagmi: ^0.7.5
     zod: ^3.18.0
   languageName: unknown
@@ -5572,7 +5572,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.5.10, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -5654,17 +5654,6 @@ __metadata:
   dependencies:
     safe-buffer: ^5.1.0
   checksum: d779499376bd4cbb435ef3ab9a957006c8682f343f14089ed5f27764e4645114196e75b7f6abf1cbd84fd247c0cb0651698444df8c9bf30e62120fbbc52269d6
-  languageName: node
-  linkType: hard
-
-"react-blockies@npm:^1.4.1":
-  version: 1.4.1
-  resolution: "react-blockies@npm:1.4.1"
-  dependencies:
-    prop-types: ^15.5.10
-  peerDependencies:
-    react: ">=15.0.0"
-  checksum: 87139fc2cc682d34ff8633c58ce96f89826cc3127499b623fb1d8c99dd8e1fe21055750a051933ffc500ca9c88aa017930deae963ffc635135c02907e5d75e22
   languageName: node
   linkType: hard
 
@@ -6601,6 +6590,15 @@ __metadata:
   dependencies:
     punycode: ^2.1.0
   checksum: 7167432de6817fe8e9e0c9684f1d2de2bb688c94388f7569f7dbdb1587c9f4ca2a77962f134ec90be0cc4d004c939ff0d05acc9f34a0db39a3c797dada262633
+  languageName: node
+  linkType: hard
+
+"use-debounce@npm:^8.0.4":
+  version: 8.0.4
+  resolution: "use-debounce@npm:8.0.4"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 0f8b9e571f68a4694033ec00690bf73d781ac890140ae9ed4b330f71f7adb3f7d7df5cdaa32923c4d03fdc9de8a11be0f84301175ae4f66208af52ad03c55504
   languageName: node
   linkType: hard
 
