@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Disclosure } from '@headlessui/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { UserIcon, Bars3Icon, XCircleIcon } from '@heroicons/react/24/outline';
@@ -17,10 +17,13 @@ const MainNavigation = () => {
     useConnect({
       chainId: chain.goerli.id,
     });
-  const { isConnected, address, isReconnecting, isConnecting } = useAccount();
+  const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
 
   const [searchValue, setSearchValue] = useState<string>('');
+
+  const [isWalletConnected, setIsWalletConnected] = useState<boolean>(false);
+  useEffect(() => setIsWalletConnected(isConnected), [isConnected]);
 
   const handleSearch = () => {
     router.push(`/search/${searchValue}`);
@@ -147,7 +150,7 @@ const MainNavigation = () => {
               </div>
               <div className="hidden lg:ml-8 lg:flex lg:items-center">
                 {/* Profile dropdown */}
-                {!isReconnecting && !isConnecting && isConnected ? (
+                {isWalletConnected ? (
                   <WalletConnectedMenu
                     disconnect={disconnect}
                     address={address}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Tab } from '@headlessui/react';
 import { useAccount } from 'wagmi';
 
@@ -12,6 +12,9 @@ function classNames(...classes: string[]) {
 const SendSwapTabs = () => {
   const { isConnected, address } = useAccount();
 
+  const [isWalletConnected, setIsWalletConnected] = useState<boolean>(false);
+  useEffect(() => setIsWalletConnected(isConnected), [isConnected]);
+
   const noWalletFound = (action: string) => {
     return (
       <h3 className="text-center text-sm font-medium leading-5">
@@ -21,7 +24,7 @@ const SendSwapTabs = () => {
   };
 
   return (
-    <div className="mx-auto w-full max-w-md px-2 py-16 sm:px-0">
+    <div className="mx-auto w-full max-w-md px-2 py-9 sm:px-0">
       <Tab.Group>
         <Tab.List className="flex space-x-1 rounded-xl bg-indigo-100 p-1">
           <Tab
@@ -58,7 +61,7 @@ const SendSwapTabs = () => {
             key="send"
             className={classNames('rounded-xl bg-white p-3')}
           >
-            {isConnected ? (
+            {isWalletConnected ? (
               <SendTab address={address} />
             ) : (
               noWalletFound('send')
@@ -71,7 +74,7 @@ const SendSwapTabs = () => {
               'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
             )}
           >
-            {isConnected ? <SwapTab /> : noWalletFound('swap')}
+            {isWalletConnected ? <SwapTab /> : noWalletFound('swap')}
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
