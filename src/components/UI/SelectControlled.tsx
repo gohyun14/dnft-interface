@@ -2,8 +2,12 @@ import { Fragment, Dispatch, SetStateAction } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { tokenOption } from '../send-swap/SendTab';
+import { STRING_LITERAL_DROP_BUNDLE } from 'next/dist/shared/lib/constants';
 
 type SelectControlledProps = {
+  label: string;
+  secondaryLabel?: string;
+  description: string;
   tokens: tokenOption[];
   selectedToken: tokenOption | undefined;
   onChange: (arg: tokenOption) => void;
@@ -17,13 +21,21 @@ const SelectControlled = ({
   tokens,
   selectedToken,
   onChange,
+  label,
+  secondaryLabel,
+  description,
 }: SelectControlledProps) => {
   return (
     <Listbox value={selectedToken} onChange={onChange}>
       {({ open }) => (
         <div>
-          <Listbox.Label className="block text-sm font-medium text-gray-700">
-            Token
+          <Listbox.Label className="flex flex-row justify-between text-sm font-medium text-gray-700">
+            {label}
+            {secondaryLabel !== undefined && (
+              <span className="font-normal text-gray-500">
+                {secondaryLabel}
+              </span>
+            )}
           </Listbox.Label>
           <div className="relative mt-1">
             <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
@@ -82,7 +94,7 @@ const SelectControlled = ({
                 ))}
               </Listbox.Options>
             </Transition>
-            <p className="mt-2 text-sm text-gray-500">Token you want to send</p>
+            <p className="mt-2 text-sm text-gray-500">{description}</p>
           </div>
         </div>
       )}

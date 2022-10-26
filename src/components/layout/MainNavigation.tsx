@@ -17,7 +17,7 @@ const MainNavigation = () => {
     useConnect({
       chainId: chain.goerli.id,
     });
-  const { isConnected, address, isReconnecting } = useAccount();
+  const { isConnected, address, isReconnecting, isConnecting } = useAccount();
   const { disconnect } = useDisconnect();
 
   const [searchValue, setSearchValue] = useState<string>('');
@@ -147,7 +147,7 @@ const MainNavigation = () => {
               </div>
               <div className="hidden lg:ml-8 lg:flex lg:items-center">
                 {/* Profile dropdown */}
-                {!isReconnecting && isConnected ? (
+                {!isReconnecting && !isConnecting && isConnected ? (
                   <WalletConnectedMenu
                     disconnect={disconnect}
                     address={address}

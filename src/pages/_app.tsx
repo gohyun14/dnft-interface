@@ -15,6 +15,7 @@ import { env } from 'process';
 import { WagmiConfig, createClient, chain, configureChains } from 'wagmi';
 
 import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { infuraProvider } from 'wagmi/providers/infura';
 import { publicProvider } from 'wagmi/providers/public';
 
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
@@ -32,7 +33,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   // Two popular providers are Alchemy (alchemy.com) and Infura (infura.io)
   const { chains, provider, webSocketProvider } = configureChains(
     [chain.goerli],
-    [alchemyProvider({ apiKey: env.ALCHEMY_API_KEY_GOERLI }), publicProvider()]
+    [infuraProvider({ apiKey: env.INFURA_API_KEY })] //, publicProvider()] INFURA_API_KEY
   );
 
   // Set up client
