@@ -25,7 +25,7 @@ const InputControlled = ({
   return (
     <div>
       <label
-        htmlFor="email"
+        htmlFor="input"
         className="block text-sm font-medium text-gray-700"
       >
         {label}
@@ -33,8 +33,8 @@ const InputControlled = ({
       <div className="relative mt-1">
         <input
           type="text"
-          name="email"
-          id="email"
+          name="input"
+          id="input"
           className={classNames(
             'block w-full rounded-md border px-3 py-2 shadow-sm sm:text-sm',
             error
@@ -60,7 +60,7 @@ const InputControlled = ({
             'mt-2 text-sm',
             error ? 'text-red-600' : 'text-gray-500'
           )}
-          id="email-description"
+          id="input-description"
         >
           {error && errorMessage ? errorMessage : description}
         </p>

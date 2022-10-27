@@ -74,7 +74,11 @@ const SendSwapTabs = () => {
               'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
             )}
           >
-            {isWalletConnected ? <SwapTab /> : noWalletFound('swap')}
+            {isWalletConnected ? (
+              <SwapTab address={address} />
+            ) : (
+              noWalletFound('swap')
+            )}
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
