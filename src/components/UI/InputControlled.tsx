@@ -5,9 +5,10 @@ type InputControlledProps = {
   label: string;
   description?: string;
   value: string;
-  setValue: (arg: string) => void;
+  setValue: (arg: any) => void;
   error?: boolean;
   errorMessage?: string;
+  isNumber?: boolean;
 };
 
 function classNames(...classes: string[]) {
@@ -21,6 +22,7 @@ const InputControlled = ({
   setValue,
   error,
   errorMessage,
+  isNumber,
 }: InputControlledProps) => {
   return (
     <div>
@@ -42,7 +44,16 @@ const InputControlled = ({
               : 'border-gray-300  focus:border-indigo-500'
           )}
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            if (isNumber) {
+              const re = /^\d*\.?\d*$/;
+              if (e.target.value === '' || re.test(e.target.value)) {
+                setValue(e.target.value);
+              }
+            } else {
+              setValue(e.target.value);
+            }
+          }}
         />
         {error && (
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">

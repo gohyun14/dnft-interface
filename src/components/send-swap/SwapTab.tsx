@@ -135,7 +135,7 @@ const SwapTab = ({ address }: SendTabProps) => {
         )
       );
 
-    if (address !== undefined && allowanceValid) {
+    if (address !== undefined && allowanceValid && !userBalanceInvalid) {
       setData();
     }
   }, [
@@ -145,6 +145,7 @@ const SwapTab = ({ address }: SendTabProps) => {
     selectedToken2,
     debouncedAmount,
     allowanceValid,
+    userBalanceInvalid,
   ]);
 
   const [transactionRequest, setTransactionRequest] = useState<
@@ -172,7 +173,8 @@ const SwapTab = ({ address }: SendTabProps) => {
     request: transactionRequest as TransactionRequest & {
       to: string;
     },
-    enabled: transactionRequest !== null && allowanceValid,
+    enabled:
+      transactionRequest !== null && allowanceValid && !userBalanceInvalid,
   });
   const {
     data: swapTransactionData,
@@ -223,6 +225,7 @@ const SwapTab = ({ address }: SendTabProps) => {
             setValue={setAmount}
             error={userBalanceInvalid}
             errorMessage="Not enough tokens"
+            isNumber
           />
         </section>
       </div>
