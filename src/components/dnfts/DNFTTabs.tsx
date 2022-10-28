@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Tab } from '@headlessui/react';
 import { useAccount } from 'wagmi';
 
-import SendTab from './SendTab';
-import SwapTab from './SwapTab';
+// import SendTab from './SendTab';
+// import SwapTab from './SwapTab';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -58,7 +58,7 @@ const DNFTTabs = () => {
             key="send"
             className={classNames('rounded-xl bg-white p-3')}
           >
-            {isConnected ? <SendTab /> : noWalletFound('send')}
+            {isConnected ? 'Tab1' : noWalletFound('send')}
           </Tab.Panel>
           <Tab.Panel
             key="swap"
@@ -67,7 +67,7 @@ const DNFTTabs = () => {
               'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
             )}
           >
-            {isConnected ? <SwapTab /> : noWalletFound('swap')}
+            {isConnected ? 'Tab2' : noWalletFound('swap')}
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
