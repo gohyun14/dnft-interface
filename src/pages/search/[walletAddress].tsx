@@ -11,7 +11,7 @@ import { env } from 'process';
 
 const settings = {
   apiKey: env.ALCHEMY_API_KEY,
-  network: Network.ETH_MAINNET, // Replace with your network.
+  network: Network.ETH_MAINNET,
 };
 
 const alchemy = new Alchemy(settings);

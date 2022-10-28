@@ -12,6 +12,11 @@ const NFTList = ({ ownedNfts }: NFTListProps) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalNft, setModalNft] = useState<OwnedNft>();
 
+  if (ownedNfts.length === 0) {
+    // TODO: style/component
+    return <div>No nfts in wallet</div>;
+  }
+
   return (
     <>
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">

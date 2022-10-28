@@ -27,7 +27,7 @@ const Home: NextPage = () => {
           <TechnologyCard
             name="DNFT"
             description="Mint, stake, upgrade, and view our custom dynamic NFTs"
-            link="/"
+            link="/dnfts"
             icon="photo"
           />
         </div>
