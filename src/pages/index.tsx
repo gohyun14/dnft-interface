@@ -5,6 +5,7 @@ import {
   MagnifyingGlassIcon,
   PhotoIcon,
   ArrowsUpDownIcon,
+  CurrencyDollarIcon,
 } from '@heroicons/react/24/outline';
 
 const Home: NextPage = () => {
@@ -29,10 +30,16 @@ const Home: NextPage = () => {
             Icon={MagnifyingGlassIcon}
           />
           <TechnologyCard
-            name="DNFT"
-            description="Mint, stake, upgrade, and view our custom dynamic NFTs"
+            name="Mint NFT"
+            description="Mint a special, custom NFT to collect or stake in the app"
             link="/dnfts"
             Icon={PhotoIcon}
+          />
+          <TechnologyCard
+            name="Stake NFT"
+            description="Stake your NFT to receive rewards paid every second"
+            link="/dnfts"
+            Icon={CurrencyDollarIcon}
           />
           <TechnologyCard
             name="Send/Swap"
@@ -42,6 +49,20 @@ const Home: NextPage = () => {
             rotate
           />
         </div>
+        <p className="mt-8 max-w-xl text-center text-xl text-gray-500 lg:mt-12 lg:max-w-3xl">
+          Searching is done on Ethereum Mainnet. NFT minting/staking and token
+          sending/swapping are done on Goerli Testnet. If you need Goerli Eth to
+          transact, check out the{' '}
+          <Link href="https://goerlifaucet.com/">
+            <a target="_blank" className="text-indigo-600 hover:underline">
+              Alchemy Goerli Faucet
+            </a>
+          </Link>
+          {' or the '}
+          <Link href="https://faucet.paradigm.xyz/">
+            <a target="_blank">Paradigm Goerli Faucet</a>
+          </Link>
+        </p>
       </main>
     </>
   );
