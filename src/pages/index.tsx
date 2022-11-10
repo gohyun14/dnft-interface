@@ -52,7 +52,7 @@ const Home: NextPage = () => {
         <p className="mt-8 max-w-xl text-center text-xl text-gray-500 lg:mt-12 lg:max-w-3xl xl:max-w-5xl">
           Searching is done on Ethereum Mainnet. NFT minting/staking and token
           sending/swapping are done on Goerli Testnet. If you need Goerli Eth to
-          transact, check out the{' '}
+          transact check out the{' '}
           <Link href="https://goerlifaucet.com/">
             <a
               target="_blank"
