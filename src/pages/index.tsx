@@ -49,18 +49,26 @@ const Home: NextPage = () => {
             rotate
           />
         </div>
-        <p className="mt-8 max-w-xl text-center text-xl text-gray-500 lg:mt-12 lg:max-w-3xl">
+        <p className="mt-8 max-w-xl text-center text-xl text-gray-500 lg:mt-12 lg:max-w-3xl xl:max-w-5xl">
           Searching is done on Ethereum Mainnet. NFT minting/staking and token
           sending/swapping are done on Goerli Testnet. If you need Goerli Eth to
           transact, check out the{' '}
           <Link href="https://goerlifaucet.com/">
-            <a target="_blank" className="text-indigo-600 hover:underline">
+            <a
+              target="_blank"
+              className="font-semibold text-indigo-500 hover:underline"
+            >
               Alchemy Goerli Faucet
             </a>
           </Link>
           {' or the '}
           <Link href="https://faucet.paradigm.xyz/">
-            <a target="_blank">Paradigm Goerli Faucet</a>
+            <a
+              target="_blank"
+              className="font-semibold text-indigo-500 hover:underline"
+            >
+              Paradigm Goerli Faucet
+            </a>
           </Link>
         </p>
       </main>
