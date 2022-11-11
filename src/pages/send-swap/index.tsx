@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import SendSwapTabs from '../../components/send-swap/SendSwapTabs';
+import FaucetInfo from '../../components/UI/FaucetInfo';
 
 const SendSwapPage: NextPage = () => {
   return (
@@ -21,27 +22,7 @@ const SendSwapPage: NextPage = () => {
           using Uniswap!
         </p>
         <SendSwapTabs />
-        <p className="mx-auto mt-4 max-w-xl text-center text-sm font-normal text-gray-700">
-          Token sending/swapping is done on Goerli Testnet. If you need Goerli
-          Eth to transact check out the{' '}
-          <Link href="https://goerlifaucet.com/">
-            <a
-              target="_blank"
-              className="font-semibold text-indigo-500 hover:underline"
-            >
-              Alchemy Goerli Faucet
-            </a>
-          </Link>
-          {' or the '}
-          <Link href="https://faucet.paradigm.xyz/">
-            <a
-              target="_blank"
-              className="font-semibold text-indigo-500 hover:underline"
-            >
-              Paradigm Goerli Faucet
-            </a>
-          </Link>
-        </p>
+        <FaucetInfo />
       </div>
     </>
   );
