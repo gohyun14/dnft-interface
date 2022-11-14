@@ -11,8 +11,8 @@ import {
   useWaitForTransaction,
 } from 'wagmi';
 
-import SelectControlled from '../UI/SelectControlled';
 import InputControlled from '../UI/InputControlled';
+import SelectInputControlled from '../UI/SelectInputControlled';
 import { parseEther, parseUnits } from 'ethers/lib/utils';
 
 export type tokenOption = {
@@ -168,27 +168,23 @@ const SendTab = ({ address }: SendTabProps) => {
         error={recipAddressInvalid}
         errorMessage="Invalid address"
       />
-      <SelectControlled
-        label="Token"
+      <SelectInputControlled
+        label="Token & Amount"
+        description="Token and amount you want to send"
+        value={amount}
+        setValue={setAmount}
+        error={userBalanceInvalid}
+        errorMessage="Not enough tokens"
+        isNumber
         secondaryLabel={
           userBalanceData &&
           `Balance: ${
             userBalanceData?.formatted?.split('.')[0]
           }.${userBalanceData?.formatted?.split('.')[1]?.slice(0, 3)}`
         }
-        description="Token you want to send"
         tokens={tokens}
         selectedToken={selectedToken}
         onChange={setSelectedToken}
-      />
-      <InputControlled
-        label="Amount"
-        description="Amount you want to send"
-        value={amount}
-        setValue={setAmount}
-        error={userBalanceInvalid}
-        errorMessage="Not enough tokens"
-        isNumber
       />
       <button
         className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-normal text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-indigo-800 disabled:cursor-not-allowed disabled:bg-gray-400"
