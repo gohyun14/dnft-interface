@@ -1,8 +1,7 @@
 import { Fragment, Dispatch, SetStateAction } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { tokenOption } from '../send-swap/SendTab';
-import { STRING_LITERAL_DROP_BUNDLE } from 'next/dist/shared/lib/constants';
 
 type SelectControlledProps = {
   label: string;

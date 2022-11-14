@@ -22,6 +22,8 @@ import { TransactionRequest } from '@ethersproject/abstract-provider';
 
 import SelectControlled from '../UI/SelectControlled';
 import InputControlled from '../UI/InputControlled';
+import SelectInputControlled from '../UI/SelectInputControlled';
+import SelectInputDisabled from '../UI/SelectInputDisabled';
 import { tokenOption, tokens as allTokens } from './SendTab';
 import { BigNumber } from 'ethers';
 import { sendTransaction } from '@wagmi/core';
@@ -199,7 +201,7 @@ const SwapTab = ({ address }: SendTabProps) => {
 
   return (
     <div className="flex flex-col gap-y-7">
-      <div className="flex flex-row justify-center gap-x-10">
+      {/* <div className="flex flex-row justify-center gap-x-10">
         <section className=" w-5/12">
           <SelectControlled
             label="Token 1"
@@ -228,7 +230,27 @@ const SwapTab = ({ address }: SendTabProps) => {
             isNumber
           />
         </section>
-      </div>
+      </div> */}
+      <SelectInputControlled
+        label="Token & Amount"
+        description="Token and amount you want to swap"
+        value={amount}
+        setValue={setAmount}
+        error={userBalanceInvalid}
+        errorMessage="Not enough tokens"
+        isNumber
+        secondaryLabel={
+          userBalanceData1 &&
+          `Balance: ${
+            userBalanceData1?.formatted?.split('.')[0]
+          }.${userBalanceData1?.formatted?.split('.')[1]?.slice(0, 3)}`
+        }
+        tokens={tokens.filter(
+          (token) => token.symbol !== selectedToken2?.symbol
+        )}
+        selectedToken={selectedToken1}
+        onChange={setSelectedToken1}
+      />
       <button
         className="mx-auto my-2 h-11 w-11 rounded-full border border-indigo-700 bg-indigo-100 p-2 text-indigo-800 hover:bg-indigo-200 active:bg-indigo-300"
         onClick={() => {
@@ -239,37 +261,22 @@ const SwapTab = ({ address }: SendTabProps) => {
       >
         <ArrowsUpDownIcon />
       </button>
-      <div className="flex flex-row justify-center gap-x-10">
-        <section className="w-5/12">
-          <SelectControlled
-            label="Token 2"
-            secondaryLabel={
-              userBalanceData2 &&
-              `Balance: ${
-                userBalanceData2?.formatted?.split('.')[0]
-              }.${userBalanceData2?.formatted?.split('.')[1]?.slice(0, 3)}`
-            }
-            description="Token you want to recieve"
-            tokens={tokens.filter(
-              (token) => token.symbol !== selectedToken1?.symbol
-            )}
-            selectedToken={selectedToken2}
-            onChange={setSelectedToken2}
-          />
-        </section>
-        <section className="w-5/12">
-          <label
-            htmlFor="input"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Token 2 Amount
-          </label>
-          <div className="mt-1 block w-full  px-3 py-2   sm:text-sm">
-            {route ? route?.quote.toFixed(2) : '0'}
-          </div>
-          <p className="mt-2 text-sm text-gray-500">Amount you will recieve</p>
-        </section>
-      </div>
+      <SelectInputDisabled
+        label="Token & Received Amount"
+        description="Token you want to recieve"
+        value={route ? route?.quote.toFixed(2) : ''}
+        secondaryLabel={
+          userBalanceData2 &&
+          `Balance: ${
+            userBalanceData2?.formatted?.split('.')[0]
+          }.${userBalanceData2?.formatted?.split('.')[1]?.slice(0, 3)}`
+        }
+        tokens={tokens.filter(
+          (token) => token.symbol !== selectedToken1?.symbol
+        )}
+        selectedToken={selectedToken2}
+        onChange={setSelectedToken2}
+      />
 
       {!allowanceValid &&
         debouncedAmount &&
