@@ -201,36 +201,6 @@ const SwapTab = ({ address }: SendTabProps) => {
 
   return (
     <div className="flex flex-col gap-y-7">
-      {/* <div className="flex flex-row justify-center gap-x-10">
-        <section className=" w-5/12">
-          <SelectControlled
-            label="Token 1"
-            secondaryLabel={
-              userBalanceData1 &&
-              `Balance: ${
-                userBalanceData1?.formatted?.split('.')[0]
-              }.${userBalanceData1?.formatted?.split('.')[1]?.slice(0, 3)}`
-            }
-            description="Token you want to swap"
-            tokens={tokens.filter(
-              (token) => token.symbol !== selectedToken2?.symbol
-            )}
-            selectedToken={selectedToken1}
-            onChange={setSelectedToken1}
-          />
-        </section>
-        <section className="w-5/12">
-          <InputControlled
-            label="Token 1 Amount"
-            description="Amount you want to swap"
-            value={amount}
-            setValue={setAmount}
-            error={userBalanceInvalid}
-            errorMessage="Not enough tokens"
-            isNumber
-          />
-        </section>
-      </div> */}
       <SelectInputControlled
         label="Token & Amount"
         description="Token and amount you want to swap"

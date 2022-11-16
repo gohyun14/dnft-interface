@@ -37,7 +37,7 @@ const Home: NextPage = () => {
           />
           <TechnologyCard
             name="Stake NFT"
-            description="Stake your NFT to receive rewards paid every second"
+            description="Stake your NFT to receive rewards paid every minute"
             link="/dnfts"
             Icon={CurrencyDollarIcon}
           />
