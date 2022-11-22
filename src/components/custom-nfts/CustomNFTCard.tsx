@@ -8,9 +8,14 @@ import axios from 'axios';
 interface CustomNFTCardProps {
   uri: TokenUri | undefined;
   tokenId: string;
+  buttonDisabled?: boolean;
 }
 
-const CustomNFTCard = ({ uri, tokenId }: CustomNFTCardProps) => {
+const CustomNFTCard = ({
+  uri,
+  tokenId,
+  buttonDisabled,
+}: CustomNFTCardProps) => {
   const [imageLoading, setImageLoading] = useState<boolean>(true);
 
   const urlEndpoint = 'https://ik.imagekit.io/thbgrljbi/';
@@ -51,12 +56,14 @@ const CustomNFTCard = ({ uri, tokenId }: CustomNFTCardProps) => {
         <section className="mb-1 bg-white text-center font-semibold text-gray-800">
           #{tokenId}
         </section>
-        <button
-          type="button"
-          className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-100"
-        >
-          Stake
-        </button>
+        {!buttonDisabled && (
+          <button
+            type="button"
+            className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-100"
+          >
+            Stake
+          </button>
+        )}
       </div>
     </div>
   );

@@ -32,8 +32,6 @@ type SendTabProps = {
   address?: `0x${string}`;
 };
 
-// 0x219723D005E383032ea9Ae43e4A72BdeAd0FA38b
-
 // not sure how to send eth yet with uni api
 const tokens = allTokens.filter((token) => token.tokenAddress !== undefined);
 
