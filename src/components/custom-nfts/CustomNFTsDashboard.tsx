@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
 
 import UnstakedNFTs from './UnstakedNFTs';
 import StakedNFTs from './StakedNFTs';
 import MintSection from './MintSection';
+import FaucetInfo from '../../components/UI/FaucetInfo';
 
 const CustomNFTsDashboard = () => {
-  const { address, isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
+
+  const [isWalletConnected, setIsWalletConnected] = useState<boolean>(false);
+  useEffect(() => setIsWalletConnected(isConnected), [isConnected]);
 
   const noWalletFound = () => {
     return (
@@ -20,11 +24,14 @@ const CustomNFTsDashboard = () => {
 
   return (
     <>
-      {isConnected ? (
+      {isWalletConnected ? (
         <div className="mx-auto w-full">
           <MintSection address={address as string} />
           <UnstakedNFTs address={address as string} />
           <StakedNFTs address={address as string} />
+          <div className="mt-28 mb-28">
+            <FaucetInfo />
+          </div>
         </div>
       ) : (
         noWalletFound()

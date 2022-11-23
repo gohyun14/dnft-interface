@@ -4,11 +4,14 @@ import {
   usePrepareContractWrite,
   useWaitForTransaction,
   useContractRead,
+  useBalance,
+  chain,
 } from 'wagmi';
 import { useQueryClient, useQuery } from '@tanstack/react-query';
 import CustomNFTList from './CustomNFTList';
 import { Network, Alchemy } from 'alchemy-sdk';
 import { formatUnits } from 'ethers/lib/utils';
+import { BigNumber } from 'ethers';
 
 const settings = {
   apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY_GOERLI,
@@ -77,7 +80,15 @@ const StakedNFTs = ({ address }: StakedNFTsProps) => {
     });
   }, [contractUserStakedNFTsData, stakedNFTsData]);
 
-  // view, update, claim rewards
+  // view GTKN balance
+  const { data: dataGTKNBalance } = useBalance({
+    addressOrName: address,
+    chainId: chain.goerli.id,
+    token: '0x9B327229437192AF49Ef1979a71b3452Cec73bc0',
+    watch: true,
+  });
+
+  // view, update, claim unclaimed rewards
   // view
   const { data: userRewardsData } = useContractRead({
     address: '0x2aA41342f13e47fDFf250be5D0F76C396D4d9ba4',
@@ -151,6 +162,7 @@ const StakedNFTs = ({ address }: StakedNFTsProps) => {
     ],
     functionName: 'claimReward',
     args: [address as `0x${string}`],
+    enabled: userRewardsData?.gt(BigNumber.from(0)),
   });
   const { data: dataWriteClaimRewards, write: writeClaimRewards } =
     useContractWrite(configClaimRewards); //TODO: add loading spinner minting state
@@ -175,14 +187,22 @@ const StakedNFTs = ({ address }: StakedNFTsProps) => {
         isApprovedForAll={true}
       />
       <section className="mb-8 text-center">
-        <span className="text-lg font-semibold text-gray-800">
-          Current Rewards:{' '}
-          {userRewardsData ? formatUnits(userRewardsData, 18) : '0'} GTKN
-        </span>
-        <div className="mt-2 flex flex-row justify-center gap-x-4">
+        <h2 className="text-lg font-semibold text-gray-800">
+          Unclaimed Rewards:{' '}
+          {userRewardsData ? parseInt(formatUnits(userRewardsData, 18)) : '0'}{' '}
+          GTKN
+        </h2>
+        <h2 className="text-lg font-semibold text-gray-800">
+          You Wallet Balance:{' '}
+          {dataGTKNBalance ? parseInt(dataGTKNBalance?.formatted) : '0'} GTKN
+        </h2>
+        <p className="text-xs font-light text-gray-500">
+          GTKN address: 0x9B327229437192AF49Ef1979a71b3452Cec73bc0
+        </p>
+        <div className="mt-3 flex flex-row justify-center gap-x-4">
           <button
             type="button"
-            className="inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-5 py-3 text-sm font-medium text-indigo-700 shadow-sm hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-indigo-300 disabled:bg-gray-400"
+            className="inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-5 py-3 text-sm font-medium text-indigo-700 shadow-sm hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-indigo-300 disabled:bg-gray-400 disabled:bg-gray-400"
             disabled={!writeUpdateRewards}
             onClick={() => writeUpdateRewards?.()}
           >
@@ -190,8 +210,10 @@ const StakedNFTs = ({ address }: StakedNFTsProps) => {
           </button>
           <button
             type="button"
-            className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-indigo-800 disabled:bg-gray-400"
-            disabled={!writeClaimRewards}
+            className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-indigo-800 disabled:cursor-not-allowed disabled:bg-gray-400"
+            disabled={
+              !writeClaimRewards || !userRewardsData?.gt(BigNumber.from(0))
+            }
             onClick={() => writeClaimRewards?.()}
           >
             Claim Rewards
