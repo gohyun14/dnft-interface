@@ -1,4 +1,5 @@
 import { OwnedNft } from 'alchemy-sdk';
+import { any } from 'zod';
 import CustomNFTCard from './CustomNFTCard';
 
 type CustomNFTListProps = {
@@ -6,7 +7,8 @@ type CustomNFTListProps = {
   emptyMessage: string;
   title?: string;
   description?: string;
-  buttonDisabled?: boolean;
+  staked: boolean;
+  isApprovedForAll: boolean;
 };
 
 const CustomNFTList = ({
@@ -14,7 +16,8 @@ const CustomNFTList = ({
   emptyMessage,
   title,
   description,
-  buttonDisabled,
+  staked,
+  isApprovedForAll,
 }: CustomNFTListProps) => {
   return (
     <div className="mx-auto max-w-2xl py-8 px-4 sm:px-6 sm:pt-12 sm:pb-6 lg:max-w-7xl lg:px-8">
@@ -35,7 +38,8 @@ const CustomNFTList = ({
               key={nft.tokenId}
               tokenId={nft.tokenId}
               uri={nft.tokenUri}
-              buttonDisabled={buttonDisabled}
+              staked={staked}
+              isApprovedForAll={isApprovedForAll}
             />
           ))
         ) : (

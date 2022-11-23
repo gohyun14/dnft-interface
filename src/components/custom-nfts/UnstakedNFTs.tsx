@@ -8,10 +8,9 @@ import {
 import { useQueryClient, useQuery } from '@tanstack/react-query';
 import CustomNFTList from './CustomNFTList';
 import { Network, Alchemy } from 'alchemy-sdk';
-import { env } from 'process';
 
 const settings = {
-  apiKey: env.ALCHEMY_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY_GOERLI,
   network: Network.ETH_GOERLI,
 };
 
@@ -22,8 +21,6 @@ type UnstakedNFTsProps = {
 };
 
 const UnstakedNFTs = ({ address }: UnstakedNFTsProps) => {
-  const queryClient = useQueryClient();
-
   const { isLoading: nftDataLoading, data: unstakedNFTsData } = useQuery(
     ['getUnstakedNftsForOwner'],
     () =>
@@ -37,6 +34,7 @@ const UnstakedNFTs = ({ address }: UnstakedNFTsProps) => {
     }
   );
 
+  // check and write nft approval
   const { data: isApprovedForAll } = useContractRead({
     address: '0x9c015E860f62D23F17B9e5E45fd70a765c1b3634',
     abi: [
@@ -68,12 +66,12 @@ const UnstakedNFTs = ({ address }: UnstakedNFTsProps) => {
     functionName: 'isApprovedForAll',
     args: [
       address as `0x${string}`,
-      '0x2fCaB0b8939cb07eDCc2F398E12292856787BD4B',
+      '0x2aA41342f13e47fDFf250be5D0F76C396D4d9ba4',
     ],
     watch: true,
   });
 
-  const { config } = usePrepareContractWrite({
+  const { config: approvalConfig } = usePrepareContractWrite({
     address: '0x9c015E860f62D23F17B9e5E45fd70a765c1b3634',
     abi: [
       {
@@ -97,21 +95,12 @@ const UnstakedNFTs = ({ address }: UnstakedNFTsProps) => {
     ],
     functionName: 'setApprovalForAll',
     args: [
-      '0x2fCaB0b8939cb07eDCc2F398E12292856787BD4B',
+      '0x2aA41342f13e47fDFf250be5D0F76C396D4d9ba4',
       isApprovedForAll ? false : true,
     ],
   });
   const { data: approvalWriteData, write: approvalWrite } =
-    useContractWrite(config); //TODO: add loading spinner minting state
-  const { isLoading: isTransactionLoading, isSuccess: isTransactionSuccess } =
-    useWaitForTransaction({
-      hash: approvalWriteData?.hash,
-      onSuccess() {
-        queryClient.invalidateQueries({
-          queryKey: ['getUnstakedNftsForOwner', 'getStakedNftsForOwner'],
-        });
-      },
-    });
+    useContractWrite(approvalConfig); //TODO: add loading spinner minting state
 
   return (
     <>
@@ -119,8 +108,11 @@ const UnstakedNFTs = ({ address }: UnstakedNFTsProps) => {
         ownedNfts={unstakedNFTsData?.ownedNfts}
         emptyMessage="No NFTs found"
         title="Your Unstaked NFTs"
-        description="View your unstaked NFTs, approve/unapprove them for staking , and stake them to receive GTKN rewards"
-        buttonDisabled={!isApprovedForAll}
+        description="View your unstaked NFTs, approve/unapprove them for staking, and stake them to receive GTKN rewards"
+        staked={false}
+        isApprovedForAll={
+          isApprovedForAll !== undefined ? isApprovedForAll : false
+        }
       />
       <section className="text-center">
         <button
