@@ -1,22 +1,19 @@
 import React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
-import DNFTTabs from '../../components/send-swap/SendSwapTabs';
+import CustomNFTsDashboard from '../../components/custom-nfts/CustomNFTsDashboard';
 
-const DNFTsPage: NextPage = () => {
+const CustomNFTsPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>DNFTs</title>
+        <title>Custom NFTs</title>
         <meta name="description" content="Wallet View Page" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div>
-        DNFTsPage
-        {/* <DNFTTabs /> */}
-      </div>
+      <CustomNFTsDashboard />
     </>
   );
 };
 
-export default DNFTsPage;
+export default CustomNFTsPage;

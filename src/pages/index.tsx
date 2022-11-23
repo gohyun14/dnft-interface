@@ -32,13 +32,13 @@ const Home: NextPage = () => {
           <TechnologyCard
             name="Mint NFT"
             description="Mint a special, custom NFT to collect or stake in the app"
-            link="/dnfts"
+            link="/nfts"
             Icon={PhotoIcon}
           />
           <TechnologyCard
             name="Stake NFT"
-            description="Stake your NFT to receive rewards paid every second"
-            link="/dnfts"
+            description="Stake your NFT to receive rewards paid every minute"
+            link="/nfts"
             Icon={CurrencyDollarIcon}
           />
           <TechnologyCard

@@ -59,8 +59,6 @@ type SendTabProps = {
   address?: `0x${string}`;
 };
 
-// 0x219723D005E383032ea9Ae43e4A72BdeAd0FA38b
-
 const SendTab = ({ address }: SendTabProps) => {
   const [selectedToken, setSelectedToken] = useState(tokens[0]);
 
