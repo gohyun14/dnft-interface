@@ -10,8 +10,10 @@ const SearchPage: NextPage = () => {
   const [searchValue, setSearchValue] = useState<string>('');
 
   const handleSearch = () => {
-    router.push(`/search/${searchValue}`);
-    setSearchValue('');
+    if (searchValue !== '') {
+      router.push(`/search/${searchValue}`);
+      setSearchValue('');
+    }
   };
   return (
     <>
