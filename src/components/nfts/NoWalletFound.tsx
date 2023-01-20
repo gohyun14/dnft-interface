@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
@@ -10,8 +9,10 @@ const NoWalletFound = () => {
   const [searchValue, setSearchValue] = useState<string>('');
 
   const handleSearch = () => {
-    router.push(`/search/${searchValue}`);
-    setSearchValue('');
+    if (searchValue !== '') {
+      router.push(`/search/${searchValue}`);
+      setSearchValue('');
+    }
   };
   return (
     <>

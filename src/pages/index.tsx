@@ -19,7 +19,7 @@ const Home: NextPage = () => {
 
       <main className="container mx-auto mt-8 flex flex-col items-center p-4">
         <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
-          The <span className="text-indigo-300">Crypto</span> App
+          Gabe&apos;s <span className="text-indigo-300">Crypto</span> App
         </h1>
         <p className="text-2xl text-gray-700">What you can do</p>
         <div className="mt-3 grid gap-4 pt-3 text-center md:grid-cols-2 lg:w-2/3">

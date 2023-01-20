@@ -26,8 +26,10 @@ const MainNavigation = () => {
   useEffect(() => setIsWalletConnected(isConnected), [isConnected]);
 
   const handleSearch = () => {
-    router.push(`/search/${searchValue}`);
-    setSearchValue('');
+    if (searchValue !== '') {
+      router.push(`/search/${searchValue}`);
+      setSearchValue('');
+    }
   };
 
   return (
