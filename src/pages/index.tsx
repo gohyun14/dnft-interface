@@ -1,12 +1,7 @@
+import { ArrowsUpDownIcon, PhotoIcon } from '@heroicons/react/24/outline';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import {
-  MagnifyingGlassIcon,
-  PhotoIcon,
-  ArrowsUpDownIcon,
-  CurrencyDollarIcon,
-} from '@heroicons/react/24/outline';
 
 const Home: NextPage = () => {
   return (
@@ -69,7 +64,7 @@ type TechnologyCardProps = {
   name: string;
   description: string;
   link: string;
-  Icon: (props: React.ComponentProps<'svg'>) => JSX.Element;
+  Icon: (props: React.ComponentProps<'svg'>) => JSX.Element | null;
   rotate?: boolean;
 };
 
@@ -85,12 +80,14 @@ const TechnologyCard = ({
       <a className="flex flex-col justify-center rounded border-2 border-gray-500 p-6 shadow-xl duration-500 motion-safe:hover:scale-105">
         <h2 className="text-lg text-gray-700">{name}</h2>
         <p className="text-sm text-gray-600">{description}</p>
-        <Icon
-          className={`mx-auto mt-2 h-8 w-8 text-indigo-300 ${
-            rotate && ' -rotate-90'
-          }`}
-          aria-hidden="true"
-        />
+        {Icon && (
+          <Icon
+            className={`mx-auto mt-2 h-8 w-8 text-indigo-300 ${
+              rotate && ' -rotate-90'
+            }`}
+            aria-hidden="true"
+          />
+        )}
       </a>
     </Link>
   );
