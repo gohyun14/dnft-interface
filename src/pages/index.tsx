@@ -24,22 +24,10 @@ const Home: NextPage = () => {
         <p className="text-2xl text-gray-700">What you can do</p>
         <div className="mt-3 grid gap-4 pt-3 text-center md:grid-cols-2 lg:w-2/3">
           <TechnologyCard
-            name="Search"
-            description="Search for a wallet address to explore all of their NFTs"
-            link="/search"
-            Icon={MagnifyingGlassIcon}
-          />
-          <TechnologyCard
-            name="Mint NFT"
-            description="Mint a special, custom NFT to collect or stake in the app"
+            name="Custom NFT"
+            description="Mint a special, custom NFT to stake for rewards"
             link="/nfts"
             Icon={PhotoIcon}
-          />
-          <TechnologyCard
-            name="Stake NFT"
-            description="Stake your NFT to receive rewards paid every minute"
-            link="/nfts"
-            Icon={CurrencyDollarIcon}
           />
           <TechnologyCard
             name="Send/Swap"
@@ -50,9 +38,8 @@ const Home: NextPage = () => {
           />
         </div>
         <p className="mt-8 max-w-xl text-center text-xl text-gray-500 lg:mt-12 lg:max-w-3xl xl:max-w-5xl">
-          Searching is done on Ethereum Mainnet. NFT minting/staking and token
-          sending/swapping are done on Goerli Testnet. If you need Goerli Eth to
-          transact check out the{' '}
+          NFT minting/staking and token sending/swapping are done on Goerli
+          Testnet. If you need Goerli Eth to transact check out the{' '}
           <Link href="https://goerlifaucet.com/">
             <a
               target="_blank"
